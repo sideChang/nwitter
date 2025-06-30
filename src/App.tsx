@@ -6,6 +6,9 @@ import CreateAccount from "./routes/create-account";
 import Login from "./routes/login";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/loading-screen";
+import { auth } from "./firebase";
 
 const router = createBrowserRouter([
   {
@@ -46,10 +49,22 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  // 로딩 상태 관리
+  const [isLoading, setIsLoading] = useState(true);
+
+  const init = async () => {
+    await auth.authStateReady();
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
   return (
     <>
       <GlobalStyle />
-      <RouterProvider router={router} />
+      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
     </>
   );
 }
