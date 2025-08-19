@@ -12,6 +12,7 @@ import {
   Switcher,
   Title,
 } from "../components/auth-component";
+import GithubButton from "../components/github-btn";
 
 // 각 에러 상황마다 각자 메세지를 정의할 수 있지만,
 // 여기서는 간단하게 에러 메시지를 설정하지 않고
@@ -88,13 +89,14 @@ export default function Login() {
           onChange={onChange}
           required
         />
-        <Input type="submit" value={isLoading ? "loading..." : "Log in"} />
+        <Input type="submit" value={isLoading ? "loading..." : "로그인"} />
       </Form>
       {error !== "" ? <Error>{error}</Error> : null}
       <Switcher>
         계정이 없으신가요?{""}
         <Link to="/create-account">회원가입</Link>
       </Switcher>
+      <GithubButton />
     </Wrapper>
   );
 }

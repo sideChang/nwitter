@@ -8,6 +8,9 @@ export default function Layout() {
     //로그아웃 로직
     auth.signOut();
     navigate("/");
+
+    // 로그아웃 후 페이지 새로고침
+    window.location.reload();
   };
   return (
     <>
